@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  novagallery:
+    build: .
+    #image: datroncz/novagallery
+    restart: unless-stopped
+    container_name: novagallery
+    hostname: novagallery
+    ports:
+      - 8988:80
+    volumes:
+      - config:/var/www/html/nova-config
+      - galleries:/var/www/html/galleries
+
+  samba:
+    image: dperson/samba
+    command: -p -u "gall;gall" -s "galleries;/galleries;yes;no;no;gall" -r -n
+    restart: unless-stopped
+    container_name: novagallery-samba
+    hostname: samba
+    network_mode: "host"
+    volumes:
+      - galleries:/galleries
+
+volumes:
+  config:
+  galleries:
+

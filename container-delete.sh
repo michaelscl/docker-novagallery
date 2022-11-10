@@ -1,0 +1,1 @@
+sudo -E ./docker-compose down --volumes --rmi all

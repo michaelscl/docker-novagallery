@@ -1,0 +1,1 @@
+sudo -E docker exec -it novagallery /bin/bash
